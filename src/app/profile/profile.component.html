@@ -1,0 +1,33 @@
+<div class="profile-container">
+  <div class="edit-container">
+    <div>
+      <h1>Edit profile</h1>
+    </div>
+    <form>
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="userData.Username" placeholder={{user.Username}} type="text" name="Username">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="userData.Password" placeholder="" type="password" name="Password">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="userData.Email" placeholder={{user.Email}} type="email" name="Email">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Date of birth</mat-label>
+        <input matInput [(ngModel)]="userData.Birthday" placeholder={{user.Birthday}} type="date" name="Birthday">
+      </mat-form-field>
+    </form>
+    <mat-card-actions>
+      <button mat-raised-button (click)="editUser(user._id, userData)" color="primary">Save</button>
+    </mat-card-actions>
+  </div>
+
+  <h2>Favourite movies</h2>
+  <div class="fav-movies">
+    <app-movie-card *ngIf="userFavs.length > 0" [movies]="userFavs"></app-movie-card>
+  </div>
+</div>

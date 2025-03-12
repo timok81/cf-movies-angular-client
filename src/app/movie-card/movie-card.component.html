@@ -1,15 +1,17 @@
-<div style="display: flex;">
-  <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto; margin: 1rem;">
+<div class="movie-cards">
+  <mat-card *ngFor="let movie of movies;">
+    <img src={{movie.ImagePath}} alt={{movie.Name}}>
     <mat-card-header>
-      <mat-card-title>{{movie.Name}}</mat-card-title>
-      <mat-card-subtitle style="margin-bottom: 1rem;">Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+      <mat-card-title>
+        <h1>{{movie.Name}}</h1>
+      </mat-card-title>
+      <mat-icon (click)="toggleFavouriteMovie(movie)" class="fav-icon">{{isFav(movie) ? "favorite" :
+        "favorite_border"}}</mat-icon>
     </mat-card-header>
-    <img src={{movie.ImagePath}} alt={{movie.Name}} style="width: 300px;">
-    <mat-card-actions style="display: flex; justify-content: space-between;">
-      <button mat-button color="primary">Genre</button>
-      <button mat-button color="primary">Director</button>
-      <button mat-button color="primary">Synopsis</button>
-      <mat-icon>favorite_border</mat-icon>
+    <mat-card-actions>
+      <button (click)="getGenreDetails(movie)" mat-button color="primary">Genre</button>
+      <button (click)="getDirectorDetails(movie)" mat-button color="primary">Director</button>
+      <button (click)="getMovieDetails(movie)" mat-button color="primary">Synopsis</button>
     </mat-card-actions>
   </mat-card>
 </div>

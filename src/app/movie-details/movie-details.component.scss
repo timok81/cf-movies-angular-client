@@ -1,0 +1,27 @@
+div {
+  padding: 2rem;
+}
+
+h1, h2, h3 {
+  margin: 0 0 1rem 0;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: normal;
+}
+
+h3 {
+  font-size: 1.15rem;
+  font-weight: normal;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}

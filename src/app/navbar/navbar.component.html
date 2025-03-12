@@ -1,0 +1,9 @@
+<nav class="navbar">
+  <h1>Movie Database</h1>
+  <ul class="navbar-links">
+    <li><a routerLink="/welcome" routerLinkActive="active-link">Home</a></li>
+    <li><a routerLink="/profile" routerLinkActive="active-link">Profile</a></li>
+    <li><a routerLink="/movies" routerLinkActive="active-link">Movies</a></li>
+    <li *ngIf="isLoggedIn"><a href="#" (click)="logout()">Log out</a></li>
+  </ul>
+</nav>

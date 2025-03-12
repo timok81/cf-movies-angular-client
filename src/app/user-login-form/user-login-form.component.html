@@ -1,13 +1,15 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Sign up</mat-card-title>
+    <mat-card-title><h1>Login</h1></mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <form>
       <mat-form-field>
+        <mat-label>Username</mat-label>
         <input matInput [(ngModel)]="userData.Username" placeholder="Username" type="text" name="Username" required>
       </mat-form-field>
       <mat-form-field>
+        <mat-label>Password</mat-label>
         <input matInput [(ngModel)]="userData.Password" placeholder="Password" type="password" name="Password" required>
       </mat-form-field>
     </form>

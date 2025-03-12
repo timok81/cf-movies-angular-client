@@ -31,7 +31,10 @@ export class UserLoginFormComponent implements OnInit {
         this.snackBar.open('Logged in', 'OK', {
           duration: 5000,
         });
-        this.router.navigate(['movies']);
+        //Refresh page so that navbar conditional links are refreshed
+        this.router.navigate(['movies']).then(() => {
+          window.location.reload();
+        });
       },
       (response) => {
         console.log('Response', response);

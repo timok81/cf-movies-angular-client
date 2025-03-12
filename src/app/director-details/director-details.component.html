@@ -1,0 +1,11 @@
+<div class="director-card">
+  <div class="director-image">
+    <img src={{data.directorImagepath}} alt={{data.directorName}}>
+  </div>
+  <div class="director-bio">
+    <h1>{{data.directorName}}</h1>
+    <h3>Born: {{data.directorBirthyear}}</h3>
+    <h3>Died: {{data.directorDeathyear || "-"}}</h3>
+    <p>{{data.directorBio}}</p>
+  </div>
+</div>

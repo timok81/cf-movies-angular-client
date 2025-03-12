@@ -7,14 +7,12 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
-//Declaring the api url that will provide data for the client app
 const apiUrl = 'https://moviemovie-7703363b92cb.herokuapp.com/';
+
 @Injectable({
   providedIn: 'root',
 })
 export class fetchAPIDataService {
-  // Inject the HttpClient module to the constructor params
-  // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {}
 
   //Get JWT token
@@ -28,6 +26,13 @@ export class fetchAPIDataService {
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
       Authorization: 'Bearer ' + this.getToken(),
+    });
+  }
+
+  private getHeadersJSON(): HttpHeaders {
+    return new HttpHeaders({
+      Authorization: 'Bearer ' + this.getToken(),
+      'Content-Type': 'application/json',
     });
   }
 
@@ -53,7 +58,7 @@ export class fetchAPIDataService {
 
   public getMovie(movieId: string): Observable<any> {
     return this.http
-      .get(`${apiUrl}movies${movieId}`, {
+      .get(`${apiUrl}movies/${movieId}`, {
         headers: this.getHeaders(),
       })
       .pipe(catchError(this.handleError));
@@ -61,7 +66,7 @@ export class fetchAPIDataService {
 
   public getDirector(director: string): Observable<any> {
     return this.http
-      .get(`${apiUrl}directors${director}`, {
+      .get(`${apiUrl}directors/${director}`, {
         headers: this.getHeaders(),
       })
       .pipe(catchError(this.handleError));
@@ -69,15 +74,15 @@ export class fetchAPIDataService {
 
   public getGenre(genre: string): Observable<any> {
     return this.http
-      .get(`${apiUrl}genres${genre}`, {
+      .get(`${apiUrl}genres/${genre}`, {
         headers: this.getHeaders(),
       })
       .pipe(catchError(this.handleError));
   }
 
-  public getUser(userID: string): Observable<any> {
+  public getUser(userName: string): Observable<any> {
     return this.http
-      .get(`${apiUrl}users${userID}`, {
+      .get(`${apiUrl}users/${userName}`, {
         headers: this.getHeaders(),
       })
       .pipe(catchError(this.handleError));
@@ -85,42 +90,46 @@ export class fetchAPIDataService {
 
   public deleteUser(userID: string): Observable<any> {
     return this.http
-      .delete(`${apiUrl}users${userID}`, {
+      .delete(`${apiUrl}users/${userID}`, {
         headers: this.getHeaders(),
       })
       .pipe(catchError(this.handleError));
   }
 
-  public editUser(userID: string): Observable<any> {
+  public editUser(userID: string, userDetails: any): Observable<any> {
     return this.http
-      .put(`${apiUrl}users${userID}`, {
-        headers: this.getHeaders(),
+      .put(`${apiUrl}users/${userID}`, userDetails, {
+        headers: this.getHeadersJSON(),
       })
       .pipe(catchError(this.handleError));
   }
 
-  public getUserFavouriteMovies(userID: string): Observable<any> {
+  public getUserFavouriteMovies(userName: string): Observable<any> {
     return this.http
-      .get<any>(`${apiUrl}users${userID}`, {
+      .get<any>(`${apiUrl}users/${userName}`, {
         headers: this.getHeaders(),
       })
       .pipe(
-        map((user) => user.Favouritemovies || []),
+        map((user) => user.FavouriteMovies || []),
         catchError(this.handleError)
       );
   }
 
   public addFavMovie(userID: any, movieID: any): Observable<any> {
     return this.http
-      .patch(`${apiUrl}users${userID}movies${movieID}`, {
-        headers: this.getHeaders(),
-      })
+      .patch(
+        `${apiUrl}users/${userID}/movies/${movieID}`,
+        {},
+        {
+          headers: this.getHeaders(),
+        }
+      )
       .pipe(catchError(this.handleError));
   }
 
   public deleteFavMovie(userID: any, movieID: any): Observable<any> {
     return this.http
-      .delete(`${apiUrl}users${userID}movies${movieID}`, {
+      .delete(`${apiUrl}users/${userID}/movies/${movieID}`, {
         headers: this.getHeaders(),
       })
       .pipe(catchError(this.handleError));
