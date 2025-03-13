@@ -16,6 +16,10 @@ form {
   flex-direction: column;
 }
 
+.edit-container button {
+  margin-bottom: 2rem;
+}
+
 @media all and (max-width: 450px) {
   form {
     width: 100%;

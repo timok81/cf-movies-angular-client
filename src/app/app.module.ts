@@ -29,6 +29,7 @@ import { authGuard } from './guards/auth.guard';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { DirectorDetailsComponent } from './director-details/director-details.component';
 import { GenreDetailsComponent } from './genre-details/genre-details.component';
+import { AccountDeleteConfirmComponent } from './account-delete-confirm/account-delete-confirm.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
     MovieDetailsComponent,
     DirectorDetailsComponent,
     GenreDetailsComponent,
+    AccountDeleteConfirmComponent,
   ],
   imports: [
     BrowserModule,

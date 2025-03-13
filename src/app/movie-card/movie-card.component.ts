@@ -31,11 +31,20 @@ export class MovieCardComponent implements OnInit {
       .getUserFavouriteMovies(this.user.Username)
       .subscribe((response) => {
         this.userFavs = response;
+        this.updateLocalStorageUser();
       });
   }
 
   isFav(movie: any): boolean {
     return this.userFavs.includes(movie._id);
+  }
+
+  updateLocalStorageUser(): void {
+    const newUser = {
+      ...this.user,
+      FavouriteMovies: this.userFavs,
+    };
+    localStorage.setItem('user', JSON.stringify(newUser));
   }
 
   toggleFavouriteMovie(movie: any): void {
@@ -44,18 +53,20 @@ export class MovieCardComponent implements OnInit {
         .deleteFavMovie(this.user._id, movie._id)
         .subscribe((response) => {
           this.userFavs = response.FavouriteMovies;
+          this.updateLocalStorageUser();
         });
     } else {
       this.fetchApiData
         .addFavMovie(this.user._id, movie._id)
         .subscribe((response) => {
           this.userFavs = response.FavouriteMovies;
+          this.updateLocalStorageUser();
         });
     }
   }
 
   getMovieDetails(movie: any): void {
-    console.log(movie);
+    
     this.dialog.open(MovieDetailsComponent, {
       maxWidth: '600px',
       data: {

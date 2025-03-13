@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { fetchAPIDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable, map } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { AccountDeleteConfirmComponent } from '../account-delete-confirm/account-delete-confirm.component';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +12,8 @@ import { Observable, map } from 'rxjs';
 export class ProfileComponent implements OnInit {
   constructor(
     public fetchApiData: fetchAPIDataService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -40,8 +42,24 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  confirmDeleteAccount(): void {
+    this.dialog.open(AccountDeleteConfirmComponent, {
+      maxWidth: '400px',
+      data: {
+        userID: this.user._id,
+      },
+    });
+  }
+
   editUser(userID: string, userData: any): void {
-    this.fetchApiData.editUser(userID, userData).subscribe(
+    const updatedData = { ...userData };
+
+    Object.keys(updatedData).forEach((key) => {
+      if (updatedData[key] === '') {
+        delete updatedData[key];
+      }
+    });
+    this.fetchApiData.editUser(userID, updatedData).subscribe(
       (response) => {
         localStorage.setItem('user', JSON.stringify(response));
         this.user = JSON.parse(localStorage.getItem('user') || '{}');
