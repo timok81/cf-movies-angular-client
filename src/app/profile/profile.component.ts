@@ -19,12 +19,13 @@ export class ProfileComponent implements OnInit {
   user = JSON.parse(localStorage.getItem('user') || '{}');
   userFavs: any[] = [];
   movies: any[] = [];
+  userBirthday = this.user.Birthday || ''; // in case birthday is null
 
   @Input() userData = {
     Username: this.user.Username || '',
     Password: '',
     Email: this.user.Email || '',
-    Birthday: this.user.Birthday.slice(0, 10) || '',
+    Birthday: this.userBirthday.slice(0, 10) || '', // form field needs this format
   };
 
   ngOnInit(): void {
