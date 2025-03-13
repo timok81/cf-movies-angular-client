@@ -92,6 +92,7 @@ export class fetchAPIDataService {
     return this.http
       .delete(`${apiUrl}users/${userID}`, {
         headers: this.getHeaders(),
+        responseType: 'text' as 'json',
       })
       .pipe(catchError(this.handleError));
   }

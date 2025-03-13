@@ -35,8 +35,10 @@ export class AccountDeleteConfirmComponent {
           duration: 5000,
         });
         setTimeout(() => {
-          this.router.navigate(['welcome']);
-        }, 2000);
+          this.router.navigate(['welcome']).then(() => {
+            window.location.reload();
+          });
+        }, 1000);
       },
       (response) => {
         console.log('Response', response);
