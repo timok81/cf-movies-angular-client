@@ -31,9 +31,11 @@ export class UserLoginFormComponent implements OnInit {
           duration: 5000,
         });
         //Refresh page so that navbar conditional links are refreshed
-        this.router.navigate(['movies']).then(() => {
-          window.location.reload();
-        });
+        setTimeout(() => {
+          this.router.navigate(['movies']).then(() => {
+            window.location.reload();
+          });
+        }, 1000);
       },
       (response) => {
         console.log('Response', response);
