@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
     Username: this.user.Username || '',
     Password: '',
     Email: this.user.Email || '',
-    Birthday: this.user.Birthday || '',
+    Birthday: this.user.Birthday.slice(0, 10) || '',
   };
 
   ngOnInit(): void {
@@ -52,7 +52,10 @@ export class ProfileComponent implements OnInit {
   }
 
   editUser(userID: string, userData: any): void {
-    const updatedData = { ...userData };
+    const updatedData = {
+      ...userData,
+      Birthday: new Date(userData.Birthday).toISOString(),
+    };
 
     Object.keys(updatedData).forEach((key) => {
       if (updatedData[key] === '') {
