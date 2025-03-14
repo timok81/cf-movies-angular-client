@@ -4,14 +4,27 @@ import { fetchAPIDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
+/**
+ * Component for user registration form.
+ */
 @Component({
   selector: 'app-user-registration-form',
   templateUrl: './user-registration-form.component.html',
   styleUrls: ['./user-registration-form.component.scss'],
 })
 export class UserRegistrationFormComponent implements OnInit {
+  /**
+   * Object holding user registration data.
+   */
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
+  /**
+   * Creates an instance of UserRegistrationFormComponent.
+   * @param fetchApiData Service for API calls.
+   * @param dialogRef Reference to the dialog.
+   * @param snackBar Service for displaying notifications.
+   * @param router Router for navigation.
+   */
   constructor(
     public fetchApiData: fetchAPIDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
@@ -19,8 +32,16 @@ export class UserRegistrationFormComponent implements OnInit {
     private router: Router
   ) {}
 
+  /**
+   * Lifecycle hook that is called after component initialization.
+   */
   ngOnInit(): void {}
 
+  /**
+   * Registers a new user.
+   * Closes the dialog and logs in the user upon success.
+   * Displays an error message upon failure.
+   */
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe(
       (response) => {
@@ -41,6 +62,11 @@ export class UserRegistrationFormComponent implements OnInit {
     );
   }
 
+  /**
+   * Logs in the user.
+   * Stores user details in local storage and navigates to the movies page.
+   * Refreshes the page to update the navbar.
+   */
   loginUser(): void {
     const loginUser = {
       Username: this.userData.Username,
@@ -55,7 +81,7 @@ export class UserRegistrationFormComponent implements OnInit {
         this.snackBar.open('Logged in', 'OK', {
           duration: 5000,
         });
-        //Refresh page so that navbar conditional links are refreshed
+        
         setTimeout(() => {
           this.router.navigate(['movies']).then(() => {
             window.location.reload();

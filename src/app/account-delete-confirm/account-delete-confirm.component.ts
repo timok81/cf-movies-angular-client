@@ -5,12 +5,24 @@ import { fetchAPIDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
+/**
+ * Component for confirming account deletion.
+ * Displays a confirmation dialog before deleting a user's account.
+ */
 @Component({
   selector: 'app-account-delete-confirm',
   templateUrl: './account-delete-confirm.component.html',
   styleUrls: ['./account-delete-confirm.component.scss'],
 })
 export class AccountDeleteConfirmComponent {
+  /**
+   * Constructor to inject necessary dependencies.
+   * @param data Contains user ID to be deleted.
+   * @param fetchApiData Service for API calls.
+   * @param dialogRef Reference to the dialog for closing it.
+   * @param snackBar Service to show notifications.
+   * @param router Router for navigation.
+   */
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
@@ -22,10 +34,21 @@ export class AccountDeleteConfirmComponent {
     private router: Router
   ) {}
 
+  /**
+   * Closes the confirmation dialog without deleting the account.
+   */
   closeDialog(): void {
     this.dialogRef.close();
   }
 
+  /**
+   * Deletes the user's account and handles UI updates.
+   * - Calls API to delete the user.
+   * - Clears local storage.
+   * - Closes the dialog.
+   * - Shows a snackbar notification.
+   * - Redirects to the welcome page after a short delay and reloads the page.
+   */
   deleteUser(): void {
     this.fetchApiData.deleteUser(this.data.userID).subscribe(
       (response) => {
