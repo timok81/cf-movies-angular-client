@@ -39,9 +39,11 @@ mat-card-subtitle {
 
 .fav-icon {
   opacity: 0.75;
-  color: #303F9F;
+  color: #303f9f;
+  transition: transform 0.3s;
 }
 
 .fav-icon:hover {
   opacity: 1;
+  transform: scale(1.25);
 }

@@ -20,3 +20,13 @@ The app can be accessed here: https://timok81.github.io/cf-movies-angular-client
 - Edit or delete account
 - Browse movies, actors, directors, genres
 - Add movies to favourites
+
+## Technologies used
+
+- Angular
+- Angular Material
+
+## Images
+
+![Screenshot of the app](/src/assets/movies-angular1.png)
+![Screenshot of the app](/src/assets/movies-angular2.png)
