@@ -30,3 +30,4 @@ The app can be accessed here: https://timok81.github.io/cf-movies-angular-client
 
 ![Screenshot of the app](/src/assets/movies-angular1.png)
 ![Screenshot of the app](/src/assets/movies-angular2.png)
+![Screenshot of the app](/src/assets/movies-angular3.png)
